@@ -1,40 +1,27 @@
-from flask import Flask, render_template, request, session, redirect
-import os
-import requests
-import json
+
 import pandas as pd
 import datetime
-from datetime import date
-from datetime import timedelta
+from datetime import date, timedelta
 import alpaca_trade_api as tradeapi
-from termcolor import colored
 from finta import TA
 from pandas.tseries.offsets import DateOffset
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
-from sklearn.svm import SVC
-from sklearn.ensemble import AdaBoostClassifier
-import hashlib
+#from sklearn.svm import SVC
+#from sklearn.ensemble import AdaBoostClassifier
 import streamlit as st
 
 def predict_stock(ticker, api_key, secret_key):
 
     alpaca = tradeapi.REST(
-        alpaca_api_key,
-        alpaca_secret_key,
+        api_key,
+        secret_key,
         api_version="v2")
 
-        # end_date_1 = datetime.date.today() - datetime.timedelta(days=1)
-        # start_date_1 = end_date_1 - datetime.timedelta(days=720)
-
-        # end_date = end_date_1.isoformat()
-        # start_date = start_date_1.isoformat()
-
+    end_train = date.today() - timedelta(days = 1)
+    start_train = date.today() - timedelta(weeks = 150)
     start_date = pd.Timestamp("2019-10-01", tz="America/New_York").isoformat()
     end_date = pd.Timestamp("2022-10-20", tz="America/New_York").isoformat()
-
 
     timeframe = "1Day"
 
@@ -45,9 +32,7 @@ def predict_stock(ticker, api_key, secret_key):
         end = end_date,
     ).df
 
-    # return render_template('index.html',  tables=[df.to_html(classes='data')], titles=df.columns.values)
-
-        #create OHLCV df; drop 'trade_count' and 'vwap'columns
+    #create OHLCV df; drop 'trade_count' and 'vwap'columns
     df = df.drop(['trade_count', 'vwap'], axis=1)
 
     # Use the pct_change function to generate the returns from "close"
@@ -158,28 +143,18 @@ def predict_stock(ticker, api_key, secret_key):
         result = "This stock is predicted to decrease in value. It's recommended to sell or short."
 
     return result
+
+
 ################################################################################
 # Streamlit Code
 
+# Header
+st.header("Get A Buy/Short-Sale Recommendation On A Stock")
 
-# Create the application header using a markdown string
-st.markdown("Get A Buy/Sell Recommendation On A Stock")
-
-################################################################################
-# Step 2:
-# Add a Streamlit `text_area` component to accept data from the user.
-
-# @TODO:
-# Add a Streamlit `text_area` component to accept data from the user
-# Be sure to convert the input data to a string
-# Use the `encode` function to encode the input data
-ticker = str(st.text_area("Enter Stock Ticker"))
-alpaca_api_key = str(st.text_area("Enter Alpaca API Key"))
-alpaca_secret_key = str(st.text_area("Enter Alpaca API Secret Key"))
-
-# @TODO:
-# Use the Streamlit `write` function to display the length (`len) of the input
-# data back to the user
+# Collect stock ticker and user API keys
+ticker = str(st.text_input("Enter Stock Ticker"))
+alpaca_api_key = str(st.text_input("Enter Alpaca API Key"))
+alpaca_secret_key = str(st.text_input("Enter Alpaca API Secret Key"))
 
 if st.button("Make Recommendation"):
     recommendation = predict_stock(ticker, alpaca_api_key, alpaca_secret_key)

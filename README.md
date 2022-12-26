@@ -1,6 +1,12 @@
 # Stock Signal Predictor
 
-This program uses machine learning to try to predict the future movement of an individual stock. The program uses two years of historcal stock data to train a predictive model.  Several ML models including SVC, AdaBoost, and RandomForest were tested in the code development, but the LogisticRegression model from Scikit-Learn was chosen for overall outperformace of other models. Model training in machine learning is a process that requires fine-tuning, and in this program, the size of the training-data is the variable that yeilds different performative results, with different values. So, this app attempts to assist the user in finding the optimal training window size for a model-predicted outcome. The program starts with user input of a stock ticker, which the program uses to retrieve 2 years of the stock's OHLCV historical data from the most recent market-close date, into a dataframe. The predictive trading signal column is created based on the (shifted) daily returns. The program then utilizes 12 functions of different moving averages from the Finta TA library, and records those metrics into a dataframe for model training. Next, the program iterates through a model-training process where the iterating variable is the amount of weeks designated for training data, starting with 1 week, up to 100 weeks. With each iteration, the cumulative returns of the actual security, and the cumulative returns of the algorithmic trading strategy are compared; if the algorithmic trading strategy outperforms the security's cumulative return, then that iteration's week size and algo-cumulative-return size are recorded into a dictionary (key = weeks, value = returns). After the iteration process is complete, the dictionary's highest return value is identified, and it's key (number of weeks) is extracted into a variable to finally train the model for user output.  The program uses a local web app called "Flask" for a clean and simple user experience.
+This program uses machine learning to try to predict the future movement of an individual stock. The program uses 150 weeks of historcal stock data to train a predictive model.  Several ML models including SVC, AdaBoost, and RandomForest were tested in the code development, but the LogisticRegression model from Scikit-Learn was chosen for overall outperformace of other models. 
+
+Model training in machine learning is a process that requires fine-tuning, and in this program, the size of the training-data is the variable that yeilds different performative results. So, this app attempts to assist the user in finding the optimal training window size for a model-predicted outcome. 
+
+The program starts with user input of a stock ticker and Alpaca API keys, which the program uses to retrieve the stock's OHLCV historical data from the most recent market-close date, into a dataframe. The predictive trading signal column is created based on the (shifted) daily returns. The program then utilizes 12 functions of different moving averages from the Finta TA library, and records those metrics into a dataframe for model training. Next, the program iterates through a model-training process where the iterating variable is the amount of weeks designated for training data, starting with 1 week, up to 100 weeks. With each iteration, the cumulative returns of the actual security, and the cumulative returns of the algorithmic trading strategy are compared; if the algorithmic trading strategy outperforms the security's cumulative return, then that iteration's week size and algo-cumulative-return size are recorded into a dictionary (key = weeks, value = returns). After the iteration process is complete, the dictionary's highest return value is identified, and it's key (number of weeks) is extracted into a variable to finally train the model for user output.  The program uses Streamlit interface for a clean user experience.
+
+User instructions: in terminal, type "streamlit run run.py" to run the app. Generate the prediction on the day of the prediction, before market opening. 
 
 ---
 
@@ -30,7 +36,7 @@ Scikit-learn implements machine learning and is a simple and efficient tool for 
 
 The Alpaca API allows the program to access historical or real-time stock market data.
 
-Flask for Python allows the code to be run behind a clean and simple web app within a virtual environment.
+Streamlit for Python allows the code to be run behind a clean and simple web app within a virtual environment.
 
 This program will work on Windows, MacOS and Linux with Python 3.9 installed. The program is a Jupyter Notebook and the user will need to run the program in a code editor such as Juypter Lab or Visual Studio Code.
 
@@ -58,7 +64,7 @@ Documentation for Scikit-Learn can be found [here.](https://scikit-learn.org/sta
 
 Documentation for Imbalanced-learn can be found [here.](https://imbalanced-learn.org/stable/user_guide.html)
 
-Documentation for Flask can be found [here.](https://flask.palletsprojects.com/en/2.2.x/)
+Documentation for Streamlit can be found [here.](https://docs.streamlit.io/)
 
 ---
 
