@@ -97,7 +97,7 @@ Using your CLI, navigate to the repository directory and type the following into
 streamlit run run.py
 ```
 
-The program will open in a web browser window with a prompt to enter a stock ticker of the users choice, and Alpace API keys.
+The program will open in a web browser window with a prompt to enter a stock ticker of the users choice, and Alpaca API keys.
 Once the user enters their ticker symbol and API keys, they press the "Submit" button. The program then returns an output that displays a recommendation based on the prediciton for the user to either purchase or sell / short the stock.
 
 ---
