@@ -84,7 +84,7 @@ pip install -U matplotlib
 pip install alpaca-py
 pip install -U scikit-learn
 pip install -U imbalanced-learn
-pip install Flask
+pip install streamlit
 ```
 ---
 
@@ -92,42 +92,13 @@ pip install Flask
 
 Clone or download the files from the Github repository.
 
-You must create a virtual enviroment in order to use Flask.
-Using your CLI, navigate to the directory containing the jupyter notebook file and type the following into your command prompt -
-
-For MacOS / Linux users -
+Using your CLI, navigate to the repository directory and type the following into your command prompt:
 ```
-mkdir stock_signal_predictor
-cd stock_signal_predictor
-python3 -m venv venv
+streamlit run run.py
 ```
 
-For Windows users -
-```
-mkdir stock_signal_predictor
-cd stock_signal_predictor
-py -3 -m venv venv
-```
-
-The virtual environment will then have to be activated. To do this type the following into your command prompt -
-
-For MacOS / Linux users -
-```
-. venv/bin/activate
-```
-
-For Windows users -
-```
-venv\Scripts\activate
-```
-
-The final step is to load the Flask app and the notebook file associated with it. Type the following into your command prompt -
-```
-flask --app app run
-```
-
-The program will open in a web browser window with a prompt to enter a stock ticker of the users choice.
-Once the user enters their ticker symbol, they press the "Submit" button. The program then returns an output that displays a recommendation based on the prediciton for the user to either purchase or sell / short the stock.
+The program will open in a web browser window with a prompt to enter a stock ticker of the users choice, and Alpace API keys.
+Once the user enters their ticker symbol and API keys, they press the "Submit" button. The program then returns an output that displays a recommendation based on the prediciton for the user to either purchase or sell / short the stock.
 
 ---
 
@@ -135,10 +106,10 @@ Once the user enters their ticker symbol, they press the "Submit" button. The pr
 
 Developed by:
 
-Austin
-
 Dan Poreda
 Email: danporeda@yahoo.com
+
+Austin
 
 Megan Colip
 
