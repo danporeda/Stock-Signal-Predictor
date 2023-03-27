@@ -1,6 +1,6 @@
 # Stock Signal Predictor
 
-This program uses machine learning to try to predict the future movement of an individual stock. The program uses 150 weeks of historcal stock data to train a predictive model.  Several ML models including SVC, AdaBoost, and RandomForest were tested in the code development, but the LogisticRegression model from Scikit-Learn was chosen for overall outperformace of other models. 
+This program uses machine learning to predict the future movement of an individual stock. The program uses 150 weeks of historcal stock data to train a predictive model.  Several ML models including SVC, AdaBoost, and RandomForest were tested in the code development, but the LogisticRegression model from Scikit-Learn was chosen for overall outperformace of other models. 
 
 Model training in machine learning is a process that requires fine-tuning, and in this program, the size of the training-data is the variable that yeilds different performative results. So, this app attempts to assist the user in finding the optimal training window size for a model-predicted outcome. 
 
